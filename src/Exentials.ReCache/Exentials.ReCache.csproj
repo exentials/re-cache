@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <FileVersion>0.0.6.0</FileVersion>
+    <AssemblyVersion>0.0.6.0</AssemblyVersion>
+    <VersionPrefix>0.0.6</VersionPrefix>
+    <VersionSuffix>alpha</VersionSuffix>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/exentials/re-cache</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageIcon>re-cache-icon.png</PackageIcon>
+    <Copyright>exentials.net by Gambarotto Damiano</Copyright>
+    <Company>exentials.net</Company>
+    <Authors>Gambarotto Damiano</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Protos\cache.proto" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Protobuf Include="Protos\cache.proto" GrpcServices="Server,Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.21.10" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.50.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.50.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Exentials.ReCache.Abstractions\Exentials.ReCache.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="..\re-cache-icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

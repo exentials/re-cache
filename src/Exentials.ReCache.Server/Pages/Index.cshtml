@@ -1,0 +1,23 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "ReCache";
+}
+
+<h3>Welcome to ReCache</h3>
+
+<form asp-controller="Home" asp-action="Index" method="post">
+	<p>
+		<label asp-for="Username">User name</label>
+		<input asp-for="Username" type="text" />
+	</p>
+	<p>
+		<label asp-for="Password">Password</label>
+		<input asp-for="Password" type="password" />
+	</p>
+	<div>
+		<textarea style="width:100%" readonly="true" rows="4">@Model.Token</textarea>
+	</div>
+
+	<button type="submit">Get Token</button>
+</form>

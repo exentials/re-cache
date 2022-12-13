@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+option csharp_namespace = "Exentials.ReCache.Protos";
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+
+service RpcCacheService {
+	
+	rpc ListDictionary (KeysRequest) returns (KeysResponse) 
+	{
+		option (google.api.http) = {
+			get: "/api/dictionary/list"
+		};
+	}
+
+	rpc SetDictionary (RpcCacheData) returns (Response) {
+		option (google.api.http) = {
+			post: "/api/dictionary"
+		};
+	}
+	rpc GetDictionary (RpcKey) returns (Response) {
+		option (google.api.http) = {
+			get: "/api/dictionary"
+		};
+	}
+	rpc DelDictionary (RpcKey) returns (Response) {
+		option (google.api.http) = {
+			delete: "/api/dictionary"
+		};
+	}
+
+	rpc ListHashSet (KeysRequest) returns (KeysResponse) 
+	{
+		option (google.api.http) = {
+			get: "/api/hashset/list"
+		};
+	}
+
+	rpc SetHashSet (RpcCacheData) returns (Response) {
+		option (google.api.http) = {
+			post: "/api/hashset"
+		};
+	}
+	rpc GetHashSet (RpcKey) returns (Response) {
+		option (google.api.http) = {
+			get: "/api/hashset"
+		};
+	}
+	rpc DelHashSet (RpcCacheData) returns (Response) {
+		option (google.api.http) = {
+			delete: "/api/hashset"
+		};
+
+	}
+	rpc RemoveHashSet (RpcKey) returns (Response) {
+		option (google.api.http) = {
+			delete: "/api/hashset/remove"
+		};
+	}
+	
+	rpc Clear(KeysRequest) returns (Response) {
+		option (google.api.http) = {
+			post: "/api/clear"
+		};
+	}
+
+//	rpc QueuePush (QueueData) returns (Response) {}
+//	rpc QueuePop (QueueRequest) returns (Response) {}
+//	rpc QueuePeek (QueueRequest) returns (Response) {}
+}
+
+message KeysRequest {
+	optional string nameSpace = 1;
+}
+
+message KeyItem {
+	string key = 1;
+	string nameSpace = 2;
+}
+
+message KeysResponse {
+	repeated KeyItem Items = 1;
+}
+
+message RpcCacheData {
+	string key = 1;
+	string value = 2;
+	optional string nameSpace = 3;
+	optional google.protobuf.Timestamp absoluteExpire = 4;
+	optional google.protobuf.Duration slidingExpire = 5;
+}
+
+message RpcKey {
+	string key = 1;
+	optional string nameSpace = 2;
+}
+
+message Response {
+	int32 code = 1;
+	string message = 2;
+	optional string data = 3;
+}
+
+message QueueData {
+	string message = 1;
+	optional string nameSpace = 2;
+}
+
+message QueueRequest {
+	optional string nameSpace = 1; 
+}
