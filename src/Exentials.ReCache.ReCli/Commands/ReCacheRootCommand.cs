@@ -10,6 +10,8 @@ namespace Exentials.ReCache.ReCli.Commands
         {
             Add(new ConnectCommand(_conn));
             Add(new DisconnectCommand(_conn));
+            Add(new ShowCommand(_conn));
+
             Add(new SetCommand(_conn));
             Add(new GetCommand(_conn));
             Add(new DelCommand(_conn));
