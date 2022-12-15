@@ -113,6 +113,12 @@ namespace Exentials.ReCache.Server
                 app.UseHsts();
             }
 
+            var pathBase = builder.Configuration.GetValue<string>("UsePathBase")?.TrimEnd('/');
+            if (!string.IsNullOrEmpty(pathBase))
+            {
+                app.UsePathBase(pathBase);
+            }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
