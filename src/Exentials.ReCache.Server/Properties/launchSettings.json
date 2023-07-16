@@ -7,7 +7,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "RedCache": {
+    "ReCache": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
