@@ -14,7 +14,7 @@ namespace Exentials.ReCache.Client
     public class ReCacheClient : IDisposable
     {
         private readonly string _sslUrl;
-        private readonly string _bearerToken;
+        private readonly string _authToken;
         private readonly CallCredentials _callCredentials;
         private readonly GrpcChannel _channel;
         private readonly RpcCacheService.RpcCacheServiceClient _client;
@@ -28,7 +28,7 @@ namespace Exentials.ReCache.Client
         public ReCacheClient(ReCacheClientOptions options)
         {
             _sslUrl = options.SslUrl;
-            _bearerToken = $"Bearer {options.Token}";
+            _authToken = options.Token;
             _callCredentials = CallCredentials.FromInterceptor(CredentialsInterceptor);
 
             _httpHandler = GetHttpHandler(options.KeepAlive, options.IgnoreSslCertificate);
@@ -43,9 +43,13 @@ namespace Exentials.ReCache.Client
             _client = new(_channel);
         }
 
+        private string BearerToken => $"Bearer {_authToken}";
+
+        public string AuthToken => _authToken;
+
         private Task CredentialsInterceptor(AuthInterceptorContext context, Metadata metadata)
         {
-            metadata.Add("Authorization", _bearerToken);
+            metadata.Add("Authorization", BearerToken);
             return Task.CompletedTask;
         }
 

@@ -33,6 +33,7 @@ RUN dotnet publish "Exentials.ReCache.Server.csproj" -c Release -o /app/publish 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV UsePathBase="/"
 ENV ASPNETCORE_URLS="https://+:443;http://+:80"
 ENV ASPNETCORE_HTTPS_PORT=443
 ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certificates/certificate.pfx

@@ -47,14 +47,14 @@ namespace Exentials.ReCache.ReCli
                 }
             };
 
-            HttpClient httpClient = new(handler)
-            {
-                BaseAddress = new Uri(SslUrl),
-                DefaultRequestVersion = new Version(2, 0)
-            };
 
             try
             {
+                using HttpClient httpClient = new(handler)
+                {
+                    BaseAddress = new Uri(SslUrl),
+                    DefaultRequestVersion = new Version(2, 0)
+                };
 
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync("api/Authenticate/login", new LoginModel
                 {
@@ -76,10 +76,18 @@ namespace Exentials.ReCache.ReCli
                         IsConnected = true;
                     }
                 }
+                else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+
+                }
             }
             catch (HttpRequestException)
             {
 
+            }
+            catch (UriFormatException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             return IsConnected;
         }

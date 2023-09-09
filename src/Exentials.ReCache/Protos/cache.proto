@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+//package recache;
+
 option csharp_namespace = "Exentials.ReCache.Protos";
 
 import "google/protobuf/duration.proto";
