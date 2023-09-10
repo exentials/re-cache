@@ -41,8 +41,7 @@ namespace Exentials.ReCache.ReCli
             var handler = new SocketsHttpHandler()
             {
                 SslOptions = new SslClientAuthenticationOptions
-                {
-                    // Leave certs unvalidated for debugging
+                {                    
                     RemoteCertificateValidationCallback = delegate { return true; }
                 }
             };
@@ -63,13 +62,13 @@ namespace Exentials.ReCache.ReCli
                 }, cancellationToken);
                 if (response.IsSuccessStatusCode)
                 {
-                    AuthenticationInfo? authInfo = await response.Content.ReadFromJsonAsync<AuthenticationInfo>(cancellationToken: cancellationToken);
-                    if (authInfo is not null)
+                    AuthenticationInfo? authenticationInfo = await response.Content.ReadFromJsonAsync<AuthenticationInfo>(cancellationToken: cancellationToken);
+                    if (authenticationInfo is not null)
                     {
                         _client = new ReCacheClient(new ReCacheClientOptions
                         {
                             SslUrl = SslUrl,
-                            Token = authInfo.Token,
+                            Token = authenticationInfo.Token,
                             KeepAlive = true,
                             IgnoreSslCertificate = true
                         });

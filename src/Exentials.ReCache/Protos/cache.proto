@@ -4,6 +4,7 @@ syntax = "proto3";
 
 option csharp_namespace = "Exentials.ReCache.Protos";
 
+import "google/protobuf/empty.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
@@ -14,6 +15,13 @@ service RpcCacheService {
 	{
 		option (google.api.http) = {
 			get: "/api/dictionary/list"
+		};
+	}
+
+	rpc ListDictionaryNamespaces (google.protobuf.Empty) returns (NamespacesResponse) 
+	{
+		option (google.api.http) = {
+			get: "/api/dictionary/namespaces"
 		};
 	}
 
@@ -37,6 +45,13 @@ service RpcCacheService {
 	{
 		option (google.api.http) = {
 			get: "/api/hashset/list"
+		};
+	}
+
+	rpc ListHashSetNamespaces (google.protobuf.Empty) returns (NamespacesResponse) 
+	{
+		option (google.api.http) = {
+			get: "/api/hashset/namespaces"
 		};
 	}
 
@@ -75,6 +90,10 @@ service RpcCacheService {
 
 message KeysRequest {
 	optional string nameSpace = 1;
+}
+
+message NamespacesResponse {
+	repeated string Items = 1;
 }
 
 message KeyItem {

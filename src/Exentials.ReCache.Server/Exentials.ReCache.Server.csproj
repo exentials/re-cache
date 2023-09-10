@@ -9,7 +9,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
     <ContainerImageName>exentials/re-cache</ContainerImageName>    
-    <VersionPrefix>0.0.7</VersionPrefix>
+    <VersionPrefix>0.0.9</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <Title>re-cache Server</Title>
     <Copyright>exentials.net by Gambarotto Damiano</Copyright>

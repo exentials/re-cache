@@ -147,6 +147,16 @@ namespace Exentials.ReCache
 		}
 
 		/// <summary>
+		/// Retrieve a list of namespaces
+		/// </summary>
+		/// <param name="keyType">The type of key</param>
+		/// <returns>An <href /> </returns>
+		public IEnumerable<string> Namespaces(KeyType keyType)
+		{
+			return _concurrentDictionary.Keys.Where(t => t.KeyType == keyType).GroupBy(t => t.Namespace).Select(t => t.Key);
+		}
+
+		/// <summary>
 		/// Clear the memory cache by namespace
 		/// </summary>
 		/// <param name="nameSpace"></param>

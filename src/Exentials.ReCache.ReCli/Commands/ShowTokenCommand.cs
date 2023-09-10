@@ -13,7 +13,7 @@ namespace Exentials.ReCache.ReCli.Commands
 
         protected override Task Invoke(ReCacheClient client, ParseResult parameters, CancellationToken cancellationToken)
         {
-            Console.WriteLine(client.AuthToken);
+            Console.WriteLine(client.AuthenticationToken);
             return Task.CompletedTask;
         }
 

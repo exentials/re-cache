@@ -14,7 +14,7 @@ namespace Exentials.ReCache.Client
     public class ReCacheClient : IDisposable
     {
         private readonly string _sslUrl;
-        private readonly string _authToken;
+        private readonly string _authenticationToken;
         private readonly CallCredentials _callCredentials;
         private readonly GrpcChannel _channel;
         private readonly RpcCacheService.RpcCacheServiceClient _client;
@@ -28,24 +28,24 @@ namespace Exentials.ReCache.Client
         public ReCacheClient(ReCacheClientOptions options)
         {
             _sslUrl = options.SslUrl;
-            _authToken = options.Token;
+            _authenticationToken = options.Token;
             _callCredentials = CallCredentials.FromInterceptor(CredentialsInterceptor);
 
             _httpHandler = GetHttpHandler(options.KeepAlive, options.IgnoreSslCertificate);
 
-            GrpcChannelOptions channeloptions = new()
+            GrpcChannelOptions channelOptions = new()
             {
                 Credentials = ChannelCredentials.Create(new SslCredentials(), _callCredentials),
                 HttpHandler = _httpHandler,
             };
 
-            _channel = GrpcChannel.ForAddress(_sslUrl, channeloptions);
+            _channel = GrpcChannel.ForAddress(_sslUrl, channelOptions);
             _client = new(_channel);
         }
 
-        private string BearerToken => $"Bearer {_authToken}";
+        private string BearerToken => $"Bearer {_authenticationToken}";
 
-        public string AuthToken => _authToken;
+        public string AuthenticationToken => _authenticationToken;
 
         private Task CredentialsInterceptor(AuthInterceptorContext context, Metadata metadata)
         {
@@ -55,23 +55,23 @@ namespace Exentials.ReCache.Client
 
         private static HttpMessageHandler GetHttpHandler(bool keepAlive, bool ignoreSslCertificate)
         {
-            var httpMessagehandler = new SocketsHttpHandler();
+            var httpMessageHandler = new SocketsHttpHandler();
 
             if (keepAlive)
             {
-                httpMessagehandler.PooledConnectionIdleTimeout = Timeout.InfiniteTimeSpan;
-                httpMessagehandler.KeepAlivePingDelay = TimeSpan.FromSeconds(60);
-                httpMessagehandler.KeepAlivePingTimeout = TimeSpan.FromSeconds(30);
-                httpMessagehandler.EnableMultipleHttp2Connections = true;
+                httpMessageHandler.PooledConnectionIdleTimeout = Timeout.InfiniteTimeSpan;
+                httpMessageHandler.KeepAlivePingDelay = TimeSpan.FromSeconds(60);
+                httpMessageHandler.KeepAlivePingTimeout = TimeSpan.FromSeconds(30);
+                httpMessageHandler.EnableMultipleHttp2Connections = true;
             };
             if (ignoreSslCertificate)
             {
-                httpMessagehandler.SslOptions = new SslClientAuthenticationOptions
+                httpMessageHandler.SslOptions = new SslClientAuthenticationOptions
                 {
                     RemoteCertificateValidationCallback = delegate { return true; }
                 };
             }
-            return httpMessagehandler;
+            return httpMessageHandler;
         }
 
         /// <summary>
@@ -84,6 +84,18 @@ namespace Exentials.ReCache.Client
             var response = await _client.ListDictionaryAsync(new KeysRequest { NameSpace = nameSpace ?? ReCacheKey.DefaultNamespace });
             return response.Items.Select(x => x.Key).ToList();
         }
+
+        /// <summary>
+        /// List cached namespaces
+        /// </summary>
+        /// <param name="nameSpace"></param>
+        /// <returns></returns>
+        public async ValueTask<IEnumerable<string>> ListDictionaryNamespacesAsync()
+        {
+            var response = await _client.ListDictionaryNamespacesAsync(new());
+            return response.Items.ToList();
+        }
+
 
         /// <summary>
         /// Set a string value into the cache
@@ -221,6 +233,16 @@ namespace Exentials.ReCache.Client
         {
             var response = await _client.ListHashSetAsync(new KeysRequest { NameSpace = nameSpace ?? ReCacheKey.DefaultNamespace });
             return response.Items.Select(x => x.Key).ToList();
+        }
+
+        /// <summary>
+        /// List the cached namespaces
+        /// </summary>
+        /// <returns></returns>
+        public async ValueTask<IEnumerable<string>> ListHashSetNamespacesAsync()
+        {
+            var response = await _client.ListHashSetNamespacesAsync(new());
+            return response.Items.ToList();
         }
 
         public async ValueTask<bool> SetHashSetAsync(string key, string data, DateTimeOffset? absoluteExpire = null, TimeSpan? slidingExpire = null, string? nameSpace = null)

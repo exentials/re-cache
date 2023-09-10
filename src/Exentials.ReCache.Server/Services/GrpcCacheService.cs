@@ -55,6 +55,13 @@ namespace Exentials.ReCache.Server.Services
             return Task.FromResult(response);
         }
 
+        public override Task<NamespacesResponse> ListDictionaryNamespaces(Empty request, ServerCallContext context)
+        {
+            NamespacesResponse response = new();
+            response.Items.AddRange(_cache.Namespaces(KeyType.Set));
+            return Task.FromResult(response);
+        }
+
         public override Task<Response> SetDictionary(RpcCacheData request, ServerCallContext context)
         {
             ReCacheKey key = new(request.Key, request.NameSpace, KeyType.Set);
@@ -92,6 +99,13 @@ namespace Exentials.ReCache.Server.Services
             KeysResponse response = new();
             var keys = _cache.Keys(nameSpace).Where(k => k.KeyType == KeyType.HashSet).Select(k => new KeyItem { Key = k.Key, NameSpace = k.Namespace });
             response.Items.AddRange(keys);
+            return Task.FromResult(response);
+        }
+
+        public override Task<NamespacesResponse> ListHashSetNamespaces(Empty request, ServerCallContext context)
+        {
+            NamespacesResponse response = new();
+            response.Items.AddRange(_cache.Namespaces(KeyType.HashSet));
             return Task.FromResult(response);
         }
 
