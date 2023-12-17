@@ -53,7 +53,7 @@ namespace Exentials.ReCache.Client
             return Task.CompletedTask;
         }
 
-        private static HttpMessageHandler GetHttpHandler(bool keepAlive, bool ignoreSslCertificate)
+        private static SocketsHttpHandler GetHttpHandler(bool keepAlive, bool ignoreSslCertificate)
         {
             var httpMessageHandler = new SocketsHttpHandler();
 

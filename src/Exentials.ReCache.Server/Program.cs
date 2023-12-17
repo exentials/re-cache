@@ -85,14 +85,14 @@ namespace Exentials.ReCache.Server
 
             //services.AddAuthorization();
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
+            services
+                .AddAuthorizationBuilder()
+                .AddDefaultPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
                 {
                     policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
                     policy.RequireClaim(ClaimTypes.Name);
                 });
-            });
+
 
             services.AddRazorPages();
             services.AddSignalR();
