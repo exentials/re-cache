@@ -1,53 +1,61 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <FileVersion>0.0.9.0</FileVersion>
-    <AssemblyVersion>0.0.9.0</AssemblyVersion>
-    <VersionPrefix>0.0.9</VersionPrefix>
-    <VersionSuffix>alpha</VersionSuffix>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/exentials/re-cache</RepositoryUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryType>git</RepositoryType>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageIcon>re-cache-icon.png</PackageIcon>
-    <Copyright>exentials.net by Gambarotto Damiano</Copyright>
-    <Company>exentials.net</Company>
-    <Authors>Gambarotto Damiano</Authors>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<FileVersion>0.1.0.0</FileVersion>
+		<AssemblyVersion>0.1.0.0</AssemblyVersion>
+		<VersionPrefix>0.1.0</VersionPrefix>
+		<VersionSuffix>beta</VersionSuffix>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/exentials/re-cache</RepositoryUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryType>git</RepositoryType>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageIcon>re-cache-icon.png</PackageIcon>
+		<Copyright>exentials.net by Gambarotto Damiano</Copyright>
+		<Company>exentials.net</Company>
+		<Authors>Gambarotto Damiano</Authors>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Protos\cache.proto" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Protos\cache.proto" />
+	</ItemGroup>
 
 
-  <ItemGroup>
-    <Protobuf Include="Protos\cache.proto" GrpcServices="Server,Client" />
-  </ItemGroup>
+	<ItemGroup>
+		<Protobuf Include="Protos\cache.proto" GrpcServices="Server,Client" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.24.3" />
-    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.57.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.58.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="7.0.10" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Google.Protobuf" Version="3.25.1" />
+		<PackageReference Include="Grpc.Net.ClientFactory" Version="2.59.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.60.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>		
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Exentials.ReCache.Abstractions\Exentials.ReCache.Abstractions.csproj" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+		<PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="7.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="\" />
-    <None Include="..\re-cache-icon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+		<PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.0" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\Exentials.ReCache.Abstractions\Exentials.ReCache.Abstractions.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
+		<None Include="..\re-cache-icon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>

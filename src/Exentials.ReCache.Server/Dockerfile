@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 RUN apt-get update && apt-get install -y \
     tzdata \
     && rm -rf /var/lib/apt/lists/*
@@ -8,7 +8,8 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
 RUN apt-get update && apt-get install -y \
     openssl \
     && rm -rf /var/lib/apt/lists/*
@@ -21,10 +22,11 @@ COPY ["Exentials.ReCache.Server/Exentials.ReCache.Server.csproj", "Exentials.ReC
 RUN dotnet restore "Exentials.ReCache.Server/Exentials.ReCache.Server.csproj"
 COPY . .
 WORKDIR "/src/Exentials.ReCache.Server"
-RUN dotnet build "Exentials.ReCache.Server.csproj" -c Release -o /app/build
+RUN dotnet build "Exentials.ReCache.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Exentials.ReCache.Server.csproj" -c Release -o /app/publish /p:UseAppHost=false \
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "Exentials.ReCache.Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false \
     && mkdir /app/publish/certificates \
     && openssl req -newkey rsa:4096 -x509 -sha256 -days 3650 -nodes -out certificate.crt -keyout certificate.key -subj "/CN=localhost" \
     && openssl pkcs12 -export -out /app/publish/certificates/certificate.pfx -inkey certificate.key -in certificate.crt -passout pass:
