@@ -41,7 +41,7 @@ namespace Exentials.ReCache.ReCli
             var handler = new SocketsHttpHandler()
             {
                 SslOptions = new SslClientAuthenticationOptions
-                {                    
+                {
                     RemoteCertificateValidationCallback = delegate { return true; }
                 }
             };

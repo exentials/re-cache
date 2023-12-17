@@ -2,24 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApplication3.Pages
+namespace Exentials.ReCache.Server.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel(ILogger<IndexModel> logger, AccountService accountService) : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-        private readonly AccountService _accountService;
-
         [BindProperty]
         public string Username { get; set; } = string.Empty;
         [BindProperty]
         public string Password { get; set; } = string.Empty;
         public string? Token { get; set; }
-
-        public IndexModel(ILogger<IndexModel> logger, AccountService accountService)
-        {
-            _logger = logger;
-            _accountService = accountService;
-        }
 
         public void OnGet()
         {
@@ -29,11 +20,11 @@ namespace WebApplication3.Pages
         {
             if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
             {
-                var member = _accountService.AuthenticateUser(Username, Password);
+                var member = accountService.AuthenticateUser(Username, Password);
                 if (member is not null)
                 {
-                    Token = _accountService.GenerateJSONWebToken(member);
-                    _logger.LogInformation("Authentication token request.");
+                    Token = accountService.GenerateJSONWebToken(member);
+                    logger.LogInformation("Authentication token request.");
                 }
             }
             return Page();
