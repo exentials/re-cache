@@ -47,6 +47,8 @@ namespace Exentials.ReCache.Client
 
         public string AuthenticationToken => _authenticationToken;
 
+        public bool IsConnected => _channel.State == ConnectivityState.Ready;
+
         private Task CredentialsInterceptor(AuthInterceptorContext context, Metadata metadata)
         {
             metadata.Add("Authorization", BearerToken);
