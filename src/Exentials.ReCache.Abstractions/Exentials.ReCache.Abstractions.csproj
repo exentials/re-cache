@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<FileVersion>0.1.0.0</FileVersion>
-		<AssemblyVersion>0.1.0.0</AssemblyVersion>
-		<VersionPrefix>0.1.0</VersionPrefix>
+		<FileVersion>0.2.0.0</FileVersion>
+		<AssemblyVersion>0.2.0.0</AssemblyVersion>
+		<VersionPrefix>0.2.0</VersionPrefix>
 		<VersionSuffix>beta</VersionSuffix>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/exentials/re-cache</RepositoryUrl>

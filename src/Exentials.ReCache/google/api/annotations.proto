@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2015, Google Inc.
+﻿// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,6 +26,6 @@ option java_package = "com.google.api";
 option objc_class_prefix = "GAPI";
 
 extend google.protobuf.MethodOptions {
-	// See `HttpRule`.
-	HttpRule http = 72295728;
+  // See `HttpRule`.
+  HttpRule http = 72295728;
 }
