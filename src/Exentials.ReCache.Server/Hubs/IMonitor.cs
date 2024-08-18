@@ -1,7 +1,6 @@
-﻿namespace Exentials.ReCache.Server.Hubs
+﻿namespace Exentials.ReCache.Server.Hubs;
+
+public interface IMonitor
 {
-	public interface IMonitor
-	{
-		Task ReceiveLog(string message);
-	}
+    Task ReceiveLog(string message);
 }

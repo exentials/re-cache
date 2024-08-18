@@ -1,12 +1,11 @@
-﻿namespace Exentials.ReCache
+﻿namespace Exentials.ReCache;
+
+internal class ReCacheEntrySet : ReCacheEntry
 {
-	internal class ReCacheEntrySet : ReCacheEntry
-	{
-		public ReCacheEntrySet(object? value, DateTime? absoluteExpiration, TimeSpan? slidingExpiration)
-		{
-			Value = value;
-			AbsoluteExpiration = absoluteExpiration;
-			SlidingExpiration = slidingExpiration;
-		}
-	}
+    public ReCacheEntrySet(object? value, DateTime? absoluteExpiration, TimeSpan? slidingExpiration)
+    {
+        Value = value;
+        AbsoluteExpiration = absoluteExpiration;
+        SlidingExpiration = slidingExpiration;
+    }
 }

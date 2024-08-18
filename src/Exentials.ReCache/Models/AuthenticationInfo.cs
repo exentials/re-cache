@@ -1,17 +1,16 @@
-﻿namespace Exentials.ReCache.Models
+﻿namespace Exentials.ReCache.Models;
+
+/// <summary>
+/// Authentication Info
+/// </summary>
+public class AuthenticationInfo
 {
-	/// <summary>
-	/// Authentication Info
-	/// </summary>
-	public class AuthenticationInfo
-	{
-		/// <summary>
-		/// Token
-		/// </summary>
-		public string Token { get; set; } = string.Empty;
-		/// <summary>
-		/// Message
-		/// </summary>
-		public string Message { get; set; } = string.Empty;
-	}
+    /// <summary>
+    /// Token
+    /// </summary>
+    public string Token { get; set; } = string.Empty;
+    /// <summary>
+    /// Message
+    /// </summary>
+    public string Message { get; set; } = string.Empty;
 }

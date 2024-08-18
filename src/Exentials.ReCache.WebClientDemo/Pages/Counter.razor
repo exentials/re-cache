@@ -27,6 +27,9 @@
     private async Task IncrementCount()
     {
         currentCount++;
-        await Cache.SetAsync("Counter", currentCount);
+        if (Cache.IsConnected)
+        {
+            await Cache.SetAsync("Counter", currentCount);
+        }
     }
 }

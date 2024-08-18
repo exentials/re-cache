@@ -1,8 +1,7 @@
-﻿namespace Exentials.ReCache.Server.Models
+﻿namespace Exentials.ReCache.Server.Models;
+
+public class AuthOptions
 {
-	public class AuthOptions
-	{
-		public const string Auth = "Auth";
-		public string SecretKey { get; set; } = string.Empty;
-	}
+    public const string Auth = "Auth";
+    public string SecretKey { get; set; } = string.Empty;
 }

@@ -1,13 +1,12 @@
 ﻿using System.CommandLine;
 
-namespace Exentials.ReCache.ReCli.Parameters
+namespace Exentials.ReCache.ReCli.Parameters;
+
+internal sealed class NameSpaceOption : Option<string>
 {
-    internal sealed class NameSpaceOption : Option<string>
+    public NameSpaceOption()
+        : base("--namespace", "Namespace")
     {
-        public NameSpaceOption()
-            : base("--namespace", "Namespace")
-        {
-            AddAlias("-n");
-        }
+        AddAlias("-n");
     }
 }
