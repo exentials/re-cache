@@ -86,7 +86,7 @@ public sealed class ReCacheProvider
         var entryValue = Get<HashSet<T>>(key);
         if (entryValue is null)
         {
-            entryValue = new HashSet<T> { value };
+            entryValue = [value];
             Set(key, entryValue, absoluteExpiration, slidingExpiration);
         }
         else

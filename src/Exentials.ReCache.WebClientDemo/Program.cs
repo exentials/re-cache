@@ -1,5 +1,4 @@
 using Exentials.ReCache.Client;
-using Exentials.ReCache.WebClientDemo.Data;
 
 namespace Exentials.ReCache.WebClientDemo
 {
@@ -12,7 +11,6 @@ namespace Exentials.ReCache.WebClientDemo
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
-            builder.Services.AddSingleton<WeatherForecastService>();
 
             builder.Services.Configure<ReCacheClientOptions>(builder.Configuration.GetSection(ReCacheClientOptions.ReCache));
             builder.Services.AddReCacheClient();

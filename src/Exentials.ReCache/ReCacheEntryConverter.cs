@@ -91,13 +91,8 @@ internal class ReCacheEntryConverter : JsonConverter<ReCacheEntry>
             }
         }
 
-        ReCacheEntry? entry = (ReCacheEntry?)Activator.CreateInstance(typeToConvert, [value, absoluteExpiration, slidingExpiration]);
-        if (entry is null)
-        {
-            throw new NotImplementedException();
-        }
-
-        return entry;
+        ReCacheEntry? entry = (ReCacheEntry?)Activator.CreateInstance(typeToConvert, [value, absoluteExpiration, slidingExpiration]) ?? throw new NotImplementedException();
+		return entry;
     }
 
     public override void Write(Utf8JsonWriter writer, ReCacheEntry value, JsonSerializerOptions options)
