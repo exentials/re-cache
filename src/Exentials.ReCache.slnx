@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../.gitignore" />
+    <File Path="../README.md" />
+    <File Path="publish.ps1" />
+    <File Path="releaseServer.ps1" />
+  </Folder>
+  <Project Path="Exentials.ReCache.Abstractions/Exentials.ReCache.Abstractions.csproj" />
+  <Project Path="Exentials.ReCache.Client/Exentials.ReCache.Client.csproj" />
+  <Project Path="Exentials.ReCache.ReCli/Exentials.ReCache.ReCli.csproj" />
+  <Project Path="Exentials.ReCache.Server/Exentials.ReCache.Server.csproj" />
+  <Project Path="Exentials.ReCache.WebClientDemo/Exentials.ReCache.WebClientDemo.csproj" />
+  <Project Path="Exentials.ReCache/Exentials.ReCache.csproj" />
+</Solution>
