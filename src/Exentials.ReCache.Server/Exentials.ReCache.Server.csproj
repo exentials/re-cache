@@ -9,9 +9,9 @@
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerTargetOS>Linux</DockerTargetOS>
 		<DockerfileContext>.</DockerfileContext>
-		<ContainerImageTag>0.2.0-beta;latest</ContainerImageTag>
+		<ContainerImageTag>0.4.0-beta;latest</ContainerImageTag>
 		<ContainerImageName>exentials/re-cache</ContainerImageName>
-		<VersionPrefix>0.2.0</VersionPrefix>
+		<VersionPrefix>0.4.0</VersionPrefix>
 		<VersionSuffix>beta</VersionSuffix>
 		<Title>re-cache Server</Title>
 		<Copyright>exentials.net by Gambarotto Damiano</Copyright>
