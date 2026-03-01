@@ -1,33 +1,33 @@
 ﻿using Exentials.ReCache.Client;
 using Exentials.ReCache.ReCli.Parameters;
-using System.CommandLine.Parsing;
+using System.CommandLine;
 
 namespace Exentials.ReCache.ReCli.Commands;
 
 internal sealed class SetHashSetCommand : ReCacheCommandBase
 {
-    private readonly KeyArgument keyArg = new();
-    private readonly ValueArgument valueArg = new();
-    private readonly NameSpaceOption namespaceOption = new();
+	private readonly KeyArgument keyArg = new();
+	private readonly ValueArgument valueArg = new();
+	private readonly NameSpaceOption namespaceOption = new();
 
-    public SetHashSetCommand(ReCacheConnection connection)
-        : base(connection, "sethashset")
-    {
-        AddArgument(keyArg);
-        AddArgument(valueArg);
-        AddOption(namespaceOption);
-    }
+	public SetHashSetCommand(ReCacheConnection connection)
+		: base(connection, "sethashset")
+	{
+		Arguments.Add(keyArg);
+		Arguments.Add(valueArg);
+		Options.Add(namespaceOption);
+	}
 
-    protected override async Task Invoke(ReCacheClient client, ParseResult parameters, CancellationToken cancellationToken)
-    {
-        var key = parameters.GetValueForArgument(keyArg);
-        var value = parameters.GetValueForArgument(valueArg);
+	protected override async Task Invoke(ReCacheClient client, ParseResult parameters, CancellationToken cancellationToken)
+	{
+		var key = parameters.GetValue(keyArg);
+		var value = parameters.GetValue(valueArg);
 
-        var nameSpace = parameters.GetValueForOption(namespaceOption);
+		var nameSpace = parameters.GetValue(namespaceOption);
 
-        if (await client.SetHashSetAsync(key, value, null, null, nameSpace))
-        {
-            Console.WriteLine($"{value} cached");
-        }
-    }
+		if (await client.SetHashSetAsync(key, value, null, null, nameSpace))
+		{
+			Console.WriteLine($"{value} cached");
+		}
+	}
 }

@@ -3,10 +3,11 @@
 namespace Exentials.ReCache.ReCli.Parameters;
 
 internal class ValueArgument
-    : Argument<string>
+	: Argument<string>
 {
-    public ValueArgument()
-        : base("value", "Value to cache")
-    {
-    }
+	public ValueArgument()
+		: base("value")
+	{
+		Description = "The value to cache.";
+	}
 }

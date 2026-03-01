@@ -4,10 +4,10 @@ namespace Exentials.ReCache.ReCli.Parameters;
 
 internal class SlidingOption : Option<TimeSpan?>
 {
-    public SlidingOption()
-        : base("--sliding", "Sliding time expiration (h:mm:ss,nn)")
-    {
-        AddAlias("-sx");
-        SetDefaultValue(null);
-    }
+	public SlidingOption()
+		: base("--sliding")
+	{
+		Description = "The sliding expiration time for the cache entry.";
+		Aliases.Add("-sx");	
+	}
 }

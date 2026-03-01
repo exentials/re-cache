@@ -2,6 +2,6 @@
 
 internal enum ListArgument
 {
-    Keys,
-    Namespaces
+	Keys,
+	Namespaces
 }
